@@ -4,13 +4,14 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 import static pl.lonski.kolourator.BrushColor.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 class GameStage extends Stage {
 
@@ -20,15 +21,16 @@ class GameStage extends Stage {
 	private Figure figure;
 
 	GameStage() {
-		this.screenWidth = Gdx.graphics.getWidth();
-		this.screenHeight = Gdx.graphics.getHeight();
+		getViewport().update(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), true);
+		this.screenWidth = getViewport().getScreenWidth();
+		this.screenHeight = getViewport().getScreenHeight();
 
 		next();
 	}
 
 	private void next() {
 		for (Actor actor : getActors()) {
-			actor.addAction(Actions.removeActor());
+			actor.addAction(removeActor());
 		}
 
 		figure = createFigure();
@@ -43,27 +45,27 @@ class GameStage extends Stage {
 		Figure figure = new Figure(RED);
 		float x = (screenWidth - figure.getWidth()) / 2;
 		figure.setPosition(x, -figure.getHeight());
-		figure.addAction(Actions.moveTo(x, 50, ANIMATION_SPEED * 2));
+		figure.addAction(moveTo(x, 50, ANIMATION_SPEED * 2));
 		return figure;
 	}
 
 	private List<Brush> createBrushes(BrushColor... colors) {
 		List<Brush> brushes = new ArrayList<>();
-		for (int i = 0; i < colors.length; i++) {
-			Brush brush = new Brush(colors[i], getBrushHandler());
+		for (BrushColor color : colors) {
+			Brush brush = new Brush(color, getBrushHandler());
 			brush.setScale(0.01f);
 			brush.setVisible(false);
-			brush.addAction(sequence(delay(ANIMATION_SPEED * i), show(), scaleTo(1, 1, ANIMATION_SPEED)));
 			brushes.add(brush);
 		}
 		final float spacing = screenWidth / 10;
 		final float margin = (screenWidth
 				- spacing * Math.max(0, brushes.size() - 1)
 				- brushes.get(0).getWidth() * brushes.size()) / 2;
-
+		Collections.shuffle(brushes);
 		for (int i = 0; i < brushes.size(); i++) {
 			Brush brush = brushes.get(i);
 			brush.setPosition(margin + i * (brush.getWidth() + spacing), screenHeight * 0.9f - brush.getHeight());
+			brush.addAction(sequence(delay(ANIMATION_SPEED * i), show(), scaleTo(1, 1, ANIMATION_SPEED)));
 		}
 		return brushes;
 	}
@@ -73,7 +75,27 @@ class GameStage extends Stage {
 			@Override
 			public void onDrop(float x, float y, Brush brush) {
 				if (isPainting(brush) && figure.getBrushColor() == brush.getBrushColor()) {
-					next();
+					brush.addAction(removeActor());
+					figure.addAction(sequence(
+							fadeOut(ANIMATION_SPEED),
+							new Action() {
+								@Override
+								public boolean act(float delta) {
+									figure.setColored(true);
+									return true;
+								}
+							},
+							fadeIn(ANIMATION_SPEED),
+							delay(ANIMATION_SPEED * 2),
+							moveTo(figure.getX(), -figure.getHeight(), ANIMATION_SPEED * 2),
+							new Action() {
+								@Override
+								public boolean act(float delta) {
+									next();
+									return true;
+								}
+							}
+					));
 				} else {
 					brush.moveToOriginalPosition();
 				}

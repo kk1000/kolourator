@@ -2,8 +2,6 @@ package pl.lonski.kolourator;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -21,7 +19,7 @@ public class Brush extends Actor {
 	Brush(BrushColor color, final BrushDropHandler dropHandler) {
 		this.color = color;
 		this.dropHandler = dropHandler;
-		this.texture = new TextureRegion(new Texture(Gdx.files.internal("badlogic.jpg")));
+		this.texture = new TextureRegion(color.getTexture());
 		setBounds(0, 0, texture.getRegionWidth(), texture.getRegionHeight());
 
 		addListener(new DragListener() {
