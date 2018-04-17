@@ -1,0 +1,33 @@
+{
+	"language": "pl",
+	"brushes": [
+		{
+			"id": 1,
+			"spokenName": "Czerwony",
+			"textureFile": "brush/red.png"
+		},
+		{
+			"id": 2,
+			"spokenName": "Zielony",
+			"textureFile": "brush/green.png"
+		},
+		{
+			"id": 3,
+			"spokenName": "Niebieski",
+			"textureFile": "brush/blue.png"
+		},
+		{
+			"id": 4,
+			"spokenName": "Żółty",
+			"textureFile": "brush/yellow.png"
+		}
+	],
+	"figures": [
+		{
+			"brushId": 1,
+			"spokenName": "czerwona biedronka",
+			"textureFile": "figure/ladybird.png",
+			"textureFileColor": "figure/ladybird_color.png"
+		}
+	]
+}
