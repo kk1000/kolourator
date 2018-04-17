@@ -10,18 +10,16 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
-interface BrushDropHandler {
-	void onDrop(float x, float y, Brush brush);
-}
-
 public class Brush extends Actor {
 
 	private float originalX;
 	private float originalY;
 	private final TextureRegion texture;
 	private final BrushDropHandler dropHandler;
+	private final BrushColor color;
 
-	Brush(final BrushDropHandler dropHandler) {
+	Brush(BrushColor color, final BrushDropHandler dropHandler) {
+		this.color = color;
 		this.dropHandler = dropHandler;
 		this.texture = new TextureRegion(new Texture(Gdx.files.internal("badlogic.jpg")));
 		setBounds(0, 0, texture.getRegionWidth(), texture.getRegionHeight());
@@ -44,6 +42,10 @@ public class Brush extends Actor {
 				dropHandler.onDrop(x, y, Brush.this);
 			}
 		});
+	}
+
+	BrushColor getBrushColor() {
+		return color;
 	}
 
 	void moveToOriginalPosition() {

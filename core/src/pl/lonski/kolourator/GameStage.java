@@ -1,9 +1,7 @@
 package pl.lonski.kolourator;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.scaleTo;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.show;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+import static pl.lonski.kolourator.BrushColor.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,26 +34,26 @@ class GameStage extends Stage {
 		figure = createFigure();
 		addActor(figure);
 
-		for (Brush brush : createBrushes("a", "b", "c", "d")) {
+		for (Brush brush : createBrushes(RED, GREEN, BLUE, YELLOW)) {
 			addActor(brush);
 		}
 	}
 
 	private Figure createFigure() {
-		Figure figure = new Figure();
+		Figure figure = new Figure(RED);
 		float x = (screenWidth - figure.getWidth()) / 2;
 		figure.setPosition(x, -figure.getHeight());
 		figure.addAction(Actions.moveTo(x, 50, ANIMATION_SPEED * 2));
 		return figure;
 	}
 
-	private List<Brush> createBrushes(String... colors) {
+	private List<Brush> createBrushes(BrushColor... colors) {
 		List<Brush> brushes = new ArrayList<>();
 		for (int i = 0; i < colors.length; i++) {
-			Brush brush = new Brush(getBrushHandler());
+			Brush brush = new Brush(colors[i], getBrushHandler());
 			brush.setScale(0.01f);
 			brush.setVisible(false);
-			brush.addAction(sequence(delay(ANIMATION_SPEED * i), show(),scaleTo(1, 1, ANIMATION_SPEED)));
+			brush.addAction(sequence(delay(ANIMATION_SPEED * i), show(), scaleTo(1, 1, ANIMATION_SPEED)));
 			brushes.add(brush);
 		}
 		final float spacing = screenWidth / 10;
@@ -74,7 +72,7 @@ class GameStage extends Stage {
 		return new BrushDropHandler() {
 			@Override
 			public void onDrop(float x, float y, Brush brush) {
-				if (isPainting(brush)) {
+				if (isPainting(brush) && figure.getBrushColor() == brush.getBrushColor()) {
 					next();
 				} else {
 					brush.moveToOriginalPosition();

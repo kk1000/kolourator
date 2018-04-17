@@ -8,10 +8,16 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 class Figure extends Actor {
 
 	private final Texture texture;
+	private final BrushColor color;
 
-	Figure() {
+	Figure(BrushColor color) {
 		this.texture = new Texture(Gdx.files.internal("badlogic.jpg"));
-		setBounds(0,0, texture.getWidth(), texture.getHeight());
+		this.color = color;
+		setBounds(0, 0, texture.getWidth(), texture.getHeight());
+	}
+
+	BrushColor getBrushColor() {
+		return color;
 	}
 
 	@Override
