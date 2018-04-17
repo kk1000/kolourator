@@ -20,6 +20,11 @@
 			"id": 4,
 			"spokenName": "Żółty",
 			"textureFile": "brush/yellow.png"
+		},
+		{
+			"id": 5,
+			"spokenName": "Różowy",
+			"textureFile": "brush/pink.png"
 		}
 	],
 	"figures": [
@@ -28,6 +33,30 @@
 			"spokenName": "czerwona biedronka",
 			"textureFile": "figure/ladybird.png",
 			"textureFileColor": "figure/ladybird_color.png"
+		},
+		{
+			"brushId": 4,
+			"spokenName": "żółta żyrafa",
+			"textureFile": "figure/giraffe.png",
+			"textureFileColor": "figure/giraffe_color.png"
+		},
+		{
+			"brushId": 5,
+			"spokenName": "różowa świnka",
+			"textureFile": "figure/pig.png",
+			"textureFileColor": "figure/pig_color.png"
+		},
+		{
+			"brushId": 2,
+			"spokenName": "zielona żabka",
+			"textureFile": "figure/frog.png",
+			"textureFileColor": "figure/frog_color.png"
+		},
+		{
+			"brushId": 3,
+			"spokenName": "niebieski rekin",
+			"textureFile": "figure/shark.png",
+			"textureFileColor": "figure/shark_color.png"
 		}
 	]
 }

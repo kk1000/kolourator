@@ -1,8 +1,6 @@
 package pl.lonski.kolourator;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -48,6 +46,7 @@ public class Kolourator extends ApplicationAdapter {
 			TextureRegion textureColor = new TextureRegion(new Texture(Gdx.files.internal(def.textureFileColor)));
 			figures.add(new Figure(def.brushId, def.spokenName, texture, textureColor));
 		}
+		Collections.shuffle(figures);
 
 		speaker = speakerProvider.get(new Locale(config.language));
 		stage = new GameStage(this);

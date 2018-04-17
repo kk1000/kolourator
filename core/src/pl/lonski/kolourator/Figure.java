@@ -45,4 +45,8 @@ class Figure extends Actor {
 				getScaleX(), getScaleY(), getRotation());
 		batch.setColor(old);
 	}
+
+	public boolean isColored() {
+		return isColored;
+	}
 }

@@ -20,6 +20,7 @@ class GameStage extends Stage {
 	private final List<Integer> brushIds;
 	private final Random random;
 	private Figure figure;
+	private int figureIdx;
 	private Kolourator game;
 
 	GameStage(Kolourator game) {
@@ -29,6 +30,7 @@ class GameStage extends Stage {
 		this.game = game;
 		this.random = new SecureRandom();
 		this.brushIds = new ArrayList<>();
+		this.figureIdx = -1;
 		for (Brush brush : game.getBrushes()) {
 			brushIds.add(brush.getId());
 		}
@@ -36,20 +38,27 @@ class GameStage extends Stage {
 	}
 
 	private void next() {
+		if (figure != null && !figure.isColored()) {
+			return;
+		}
+
 		for (Actor actor : new SnapshotArray<Actor>(getActors())) {
 			actor.remove();
 		}
+		figureIdx++;
+		if (figureIdx == game.getFigures().size()) {
+			Collections.shuffle(game.getFigures());
+			figureIdx = 0;
+		}
 		figure = createFigure();
 		addActor(figure);
-
 		for (Brush brush : createBrushes(figure.getBrushId())) {
 			addActor(brush);
 		}
 	}
 
 	private Figure createFigure() {
-		int index = random.nextInt(game.getFigures().size());
-		Figure figure = game.getFigures().get(index);
+		Figure figure = game.getFigures().get(figureIdx);
 		float x = (screenWidth - figure.getWidth() + game.getBrushes().get(0).getWidth() * 2) / 2;
 		float y = (screenHeight - figure.getHeight()) / 2;
 		figure.setPosition(x, -figure.getHeight());
@@ -106,7 +115,7 @@ class GameStage extends Stage {
 				}
 
 				public void dragStop(InputEvent event, float x, float y, int pointer) {
-					if (isPainting(brush) && figureBrushId == brush.getId()) {
+					if (isPainting(brush) && figure.getBrushId() == brush.getId()) {
 						brush.remove();
 						figure.addAction(sequence(
 								fadeOut(ANIMATION_SPEED),
@@ -176,5 +185,5 @@ class GameStage extends Stage {
 			};
 		}
 	}
-
 }
+
