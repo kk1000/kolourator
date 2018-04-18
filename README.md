@@ -4,7 +4,7 @@ An android game for kids to help learning colors and words.
 
 ## Demo
 
-[Video](https://lonski.pl/photo/video/6EBD9475E5956E578406E2C06A33CB956C50EF31)
+[Video](https://lonski.pl/photo/video/8315274C8F83925A1C15C9D2FFDE0D02E4D2D015)
 
 ## Screenshots
 
