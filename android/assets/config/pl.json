@@ -40,6 +40,16 @@
 			"id": 8,
 			"spokenName": "Szary",
 			"textureFile": "brush/grey.png"
+		},
+		{
+			"id": 9,
+			"spokenName": "Fioletowy",
+			"textureFile": "brush/purple.png"
+		},
+		{
+			"id": 10,
+			"spokenName": "Pomarańczowy",
+			"textureFile": "brush/orange.png"
 		}
 	],
 	"figures": [
@@ -90,6 +100,18 @@
 			"spokenName": "brązowa wiewiórka",
 			"textureFile": "figure/squirrel.png",
 			"textureFileColor": "figure/squirrel_color.png"
+		},
+		{
+			"brushId": 9,
+			"spokenName": "fioletowa ośmiornica",
+			"textureFile": "figure/octopus.png",
+			"textureFileColor": "figure/octopus_color.png"
+		},
+		{
+			"brushId": 10,
+			"spokenName": "pomarańczowy lew",
+			"textureFile": "figure/lion.png",
+			"textureFileColor": "figure/lion_color.png"
 		}
 	]
 }
