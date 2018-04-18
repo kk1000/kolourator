@@ -32,7 +32,12 @@ public class Kolourator extends ApplicationAdapter {
 
 	@Override
 	public void create() {
-		Config config = new Json().fromJson(Config.class, Gdx.files.internal("config/pl.json").readString());
+		stage = new ChooseLanguageStage(this);
+		Gdx.input.setInputProcessor(stage);
+	}
+
+	void startGame(String configFile) {
+		Config config = new Json().fromJson(Config.class, Gdx.files.internal(configFile).readString());
 
 		brushes = new ArrayList<>();
 		for (Config.BrushDef def : config.brushes) {
