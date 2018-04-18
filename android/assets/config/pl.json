@@ -25,6 +25,21 @@
 			"id": 5,
 			"spokenName": "Różowy",
 			"textureFile": "brush/pink.png"
+		},
+		{
+			"id": 6,
+			"spokenName": "Czarny",
+			"textureFile": "brush/black.png"
+		},
+		{
+			"id": 7,
+			"spokenName": "Brązowy",
+			"textureFile": "brush/brown.png"
+		},
+		{
+			"id": 8,
+			"spokenName": "Szary",
+			"textureFile": "brush/grey.png"
 		}
 	],
 	"figures": [
@@ -57,6 +72,24 @@
 			"spokenName": "niebieski rekin",
 			"textureFile": "figure/shark.png",
 			"textureFileColor": "figure/shark_color.png"
+		},
+		{
+			"brushId": 6,
+			"spokenName": "czarny nietoperz",
+			"textureFile": "figure/bat.png",
+			"textureFileColor": "figure/bat_color.png"
+		},
+		{
+			"brushId": 8,
+			"spokenName": "szara myszka",
+			"textureFile": "figure/mouse.png",
+			"textureFileColor": "figure/mouse_color.png"
+		},
+		{
+			"brushId": 7,
+			"spokenName": "brązowa wiewiórka",
+			"textureFile": "figure/squirrel.png",
+			"textureFileColor": "figure/squirrel_color.png"
 		}
 	]
 }
